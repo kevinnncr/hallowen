@@ -7,28 +7,29 @@ import { UpdateAttendeeDto } from './dto/update-attendee.dto';
 export class AttendeesController {
   constructor(private readonly attendeesService: AttendeesService) {}
 
-  @Post()
-  create(@Body() createAttendeeDto: CreateAttendeeDto) {
-    return this.attendeesService.create(createAttendeeDto);
+  @Get('purchase')
+  async purchaseCostumes(): Promise<{ attendee: string; costume: string }[]> {
+    return this.attendeesService.purchaseCostumes();
+  }
+  @Get('adults')
+  async getAdultAttendees(): Promise<{ dni: string; firstName: string; lastName: string; age: number }[]> {
+    return this.attendeesService.getAdultAttendees();
+  }
+  @Get('nervous')
+  async getNervousAttendees(): Promise<any> {
+    return this.attendeesService.getNervousAttendees();
   }
 
-  @Get()
-  findAll() {
-    return this.attendeesService.findAll();
+  @Post('bank/:dni')
+  async increaseBudget(@Param('dni') dni: string): Promise<string> {
+    return this.attendeesService.increaseBudget(dni);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.attendeesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAttendeeDto: UpdateAttendeeDto) {
-    return this.attendeesService.update(+id, updateAttendeeDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.attendeesService.remove(+id);
+  @Post('reallocation/:donorDni/:recipientDni')
+  async reallocateBudget(
+    @Param('donorDni') donorDni: string,
+    @Param('recipientDni') recipientDni: string,
+  ): Promise<string> {
+    return this.attendeesService.reallocateBudget(donorDni, recipientDni);
   }
 }

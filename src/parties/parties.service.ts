@@ -5,24 +5,14 @@ import { PrismaService } from "../prisma/prisma.service";
 
 @Injectable()
 export class PartiesService {
-  constructor(private prisma: PrismaService) {}
-  create(createPartyDto: CreatePartyDto) {
-    return 'This action adds a new party';
-  }
+  constructor(private prisma: PrismaService) {} 
 
-  findAll() {
-    return `This action returns all parties`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} party`;
-  }
-
-  update(id: number, updatePartyDto: UpdatePartyDto) {
-    return `This action updates a #${id} party`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} party`;
+  async getPartiesByDate(date: Date): Promise<{ name: string; date: Date; address: string }[]> {
+    const parties = await this.prisma.party.findMany({ where: { date } });
+    return parties.map((party) => ({
+      name: party.name,
+      date: party.date,
+      address: party.address,
+    }));
   }
 }
