@@ -7,7 +7,7 @@ import { PrismaService } from "../prisma/prisma.service";
 export class CostumesService {
   private costumesInStock: string[] = ['WereWolf Costume', 'Vampire Costume', 'Ghost Costume'];
 
-  private attendees: number = 10; 
+  private attendees: number = 3; 
 
   getCostumesInStock(): string[] {
     return this.costumesInStock;

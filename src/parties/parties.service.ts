@@ -7,12 +7,12 @@ import { PrismaService } from "../prisma/prisma.service";
 export class PartiesService {
   constructor(private prisma: PrismaService) {} 
 
-  async getPartiesByDate(date: Date): Promise<{ name: string; date: Date; address: string }[]> {
+  async getPartiesByDate(date: Date): Promise<{  date: Date;  }[]> {
     const parties = await this.prisma.party.findMany({ where: { date } });
     return parties.map((party) => ({
-      name: party.name,
+    
       date: party.date,
-      address: party.address,
+    
     }));
   }
 }

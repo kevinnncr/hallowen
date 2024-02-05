@@ -12,11 +12,11 @@ export class AttendeesController {
     return this.attendeesService.purchaseCostumes();
   }
   @Get('adults')
-  async getAdultAttendees(): Promise<{ dni: string; firstName: string; lastName: string; age: number }[]> {
+  async getAdultAttendees(): Promise<{ dni: string;  age: number }[]> {
     return this.attendeesService.getAdultAttendees();
   }
   @Get('nervous')
-  async getNervousAttendees(): Promise<any> {
+  async getNervousAttendees(): Promise<{isNervous: boolean}[]> {
     return this.attendeesService.getNervousAttendees();
   }
 

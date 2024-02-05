@@ -9,7 +9,7 @@ export class AttendeesService {
 
   private costumesInStock: string[] = ['WereWolf Costume', 'Vampire Costume', 'Ghost Costume']; // Supongamos que estos son los disfraces disponibles
   
-  async getAdultAttendees(): Promise<any> {
+  async getAdultAttendees(): Promise<{ dni: string;  age: number }[]> {
     return this.prisma.attendee.findMany({
       where: {
         age: 18
@@ -17,7 +17,7 @@ export class AttendeesService {
     });
     
   }
-  async getNervousAttendees(): Promise<any> {
+  async getNervousAttendees(): Promise<{isNervous: boolean}[]> {
     return this.prisma.attendee.findMany({
       where: {
         isNervous: true, 

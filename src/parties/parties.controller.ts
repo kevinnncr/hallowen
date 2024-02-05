@@ -9,7 +9,7 @@ export class PartiesController {
 
   
   @Get(':date')
-  getPartiesByDate(@Param('date') date: string): Promise<{ name: string; date: Date; address: string }[]> {
+  getPartiesByDate(@Param('date') date: string): Promise<{  date: Date;  }[]> {
     return this.partiesService.getPartiesByDate(new Date(date));
   }
 }
